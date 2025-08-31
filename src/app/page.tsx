@@ -16,7 +16,6 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       const posts = await getPosts();
-      console.log('posts', posts)
       setPosts(posts);
     };
 
