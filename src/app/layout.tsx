@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { PrimeReactProvider } from 'primereact/api';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 
@@ -19,9 +18,7 @@ export default function RootLayout({ children }: IProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <PrimeReactProvider>
-          {children}
-        </PrimeReactProvider>
+        {children}
       </body>
     </html>
   )
