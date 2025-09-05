@@ -1,30 +1,45 @@
 'use client';
-import { useState, useEffect } from "react";
 import ComponentTable from "@/components/Table";
 import { URL } from "@/utils";
+import { useFetch } from "@/hook/useFetch";
 
 
 export default function App() {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const posts = useFetch<IPost[]>(`${URL}/posts`);
+  const users = useFetch<IPost[]>(`${URL}/users`);
+  
+  const postColumns = [
+    { field: 'id', header: 'Id' },
+    { field: 'title', header: 'Title' },
+    { field: 'body', header: 'Body' }
+  ];
+  const userColumns = [
+    { field: 'id', header: 'Id' },
+    { field: 'name', header: 'Name' },
+    { field: 'username', header: 'Username' },
+    { field: 'email', header: 'Email' }
+  ];
 
-  const getPosts = async (): Promise<IPost[]> => {
-    const response = await fetch(`${URL}/posts`);
-    const data = await response.json();
-    return data;
+  const showPosts = () => {
+    return <ComponentTable
+      data={posts.data}
+      columns={postColumns}
+      loading={posts.loading}
+      error={posts.error} />;
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const posts = await getPosts();
-      setPosts(posts);
-    };
-
-    fetchData();
-  }, []);
+  const showUsers = () => {
+    return <ComponentTable
+      data={users.data}
+      columns={userColumns}
+      loading={users.loading}
+      error={users.error} />;
+  }
 
   return (
     <>
-      <ComponentTable posts={posts} isTitle={true} />
+      {showPosts()}
+      {showUsers()}
     </>
   );
 }
