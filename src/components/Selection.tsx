@@ -18,6 +18,11 @@ export default function Selection(props: IProps) {
     setHospital([
       { id: 1, name: "โรงพยาบาล A" },
       { id: 2, name: "โรงพยาบาล B" },
+      { id: 3, name: "โรงพยาบาล B" },
+      { id: 4, name: "โรงพยาบาล B" },
+      { id: 5, name: "โรงพยาบาล B" },
+      { id: 6, name: "โรงพยาบาล B" },
+      { id: 7, name: "โรงพยาบาล B" },
     ]);
   }, []);
 
@@ -27,7 +32,7 @@ export default function Selection(props: IProps) {
 
   const selectedHospitalTemplate = (option: IHospital) => {
     if (option) {
-      return <div className="flex align-items-center">{option.name}</div>;
+      return <div className="h-12 flex items-center px-3">{option.name}</div>;
     }
     return <span>เลือกโรงพยาบาล</span>;
   };
@@ -46,6 +51,11 @@ export default function Selection(props: IProps) {
         showClear
         valueTemplate={selectedHospitalTemplate}
         className="w-full"
+        pt={{
+          panel: {
+            className: 'h-[500px] overflow-y-auto',
+          }
+        }}
       />
     </div>
   );
